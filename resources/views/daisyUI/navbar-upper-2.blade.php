@@ -34,20 +34,13 @@
             </a>
         </nav>
 
-        <!-- Right Buttons (Lang & Admin) -->
+        <!-- Right Buttons (Lang) -->
         <div class="hidden lg:flex items-center gap-4">
             <!-- Language Switcher -->
             <a href="{{ route('lang.switch', ['locale' => app()->getLocale(), 'lang' => app()->getLocale() == 'ar' ? 'en' : 'ar']) }}" class="btn btn-sm btn-outline rounded-full font-bold px-4" style="border-color: var(--color-primary); color: var(--color-primary);">
                 <i class="fas fa-globe mr-1"></i>
                 {{ app()->getLocale() == 'ar' ? 'English' : 'العربية' }}
             </a>
-
-            <!-- Dashboard / Admin Login Link -->
-            @auth
-                <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="btn btn-sm text-white font-bold rounded-full px-5" style="background: var(--color-primary);">
-                    <i class="fas fa-tachometer-alt mr-1"></i> {{ app()->getLocale() == 'ar' ? 'لوحة التحكم' : 'Dashboard' }}
-                </a>
-            @endauth
         </div>
 
         <!-- Mobile Menu Toggle Button -->
@@ -82,11 +75,6 @@
                     <i class="fas fa-globe mr-1"></i>
                     {{ app()->getLocale() == 'ar' ? 'English' : 'العربية' }}
                 </a>
-                @auth
-                    <a href="{{ route('home', ['locale' => app()->getLocale()]) }}" class="btn text-white text-center rounded-full" style="background: var(--color-primary);">
-                        <i class="fas fa-tachometer-alt mr-1"></i> {{ app()->getLocale() == 'ar' ? 'لوحة التحكم' : 'Dashboard' }}
-                    </a>
-                @endauth
             </div>
         </div>
     </div>
