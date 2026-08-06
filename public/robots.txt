@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /*/Admin-Panel/
+Disallow: /Admin-Panel/
+Disallow: /storage/private/
+
+Sitemap: http://localhost/NewApps/Twasol_Technology/public/sitemap.xml

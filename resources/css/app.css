@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap'); */
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Cairo', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --animate-wiggle: wiggle 2s ease-in-out infinite;
+
+    @keyframes wiggle {
+        0% {    transform: rotate(0deg);},
+        100% {  transform: rotate(-3deg);},
+        50% {   transform: rotate(3deg);}
+    }
+
+}
+
+summary{
+  @apply ps-1 hover:text-green-800 group-hover/drawer:text-emerald-700 ;
+}
+
+.owl-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* let clicks pass except on buttons */
+}
+
+.owl-nav button {
+  pointer-events: auto;
+  /* make buttons clickable again */
+}
+@media (min-width: 768px) {
+    body {
+      overflow: auto !important;
+    }
+  }
+  .tab {
+    @apply  text-black hover:bg-emerald-800/75 rounded-2xl;
+  }
+  .tab.mixitup-control-active {
+    @apply bg-emerald-800  rounded-2xl text-white font-bold;
+  }
+
+
+  .nav-parent {
+    @apply font-bold py-3 ms-2 rounded-md cursor-pointer flex items-center
+           transition-all duration-300 ease-in-out hover:bg-transparent;
+}
+
+/* When navbar is dark */
+.nav-dark .nav-parent {
+    @apply hover:text-emerald-400 group-hover/main:text-emerald-500;
+}
+
+/* When navbar is light */
+.nav-light .nav-parent {
+    @apply hover:text-emerald-600 group-hover/main:text-emerald-700;
+}
+
+.nav-subparent {
+    @apply
+    hover:flex justify-between cursor-pointer w-full text-black
+    hover:bg-base-300 ps-1
+    group-hover/submain:ps-3 group-hover/submain:w-[108%] group-hover/submain:text-emerald-700
+    transition-all ease-in-out duration-400 ;
+}
+
+.nav-child {
+    @apply focus:bg-emerald-900 hover:text-emerald-700 rounded-md
+    /* hover:bg-base-200  */
+    text-black;
+}
+
+.menu a {
+    @apply focus:bg-transparent hover:text-emerald-700 rounded-md ps-1
+    /* hover:bg-base-200 ; */
+}
+
+.navmenu {
+    @apply
+    absolute top-3/4 rtl:translate-x-[6%] ltr:-translate-x-[6%]  p-3 mt-3 min-w-full w-56 z-999 text-right
+    opacity-0 scale-95 pointer-events-none group-hover/main:opacity-100 group-hover/main:scale-100 group-hover/main:pointer-events-auto transition-all duration-300 ease-out
+    flex flex-col bg-white shadow-lg rounded-b-xl border-s-4 border-emerald-900;
+}
+/*
+.navsubmenu {
+    @apply
+    absolute top-0 start-[90%] w-56 flex-col z-0 ms-7 p-2
+    bg-white shadow-lg
+    rounded-md border-s-4 border-emerald-900
+    opacity-0 scale-95 pointer-events-none transform transition-all duration-300 ease-out group-hover/submain:opacity-100 group-hover/submain:scale-100 group-hover/submain:pointer-events-auto ;
+} */
+
+[data-aos] {
+    visibility: hidden;
+  }
+
+  [data-aos].aos-animate {
+    visibility: visible;
+  }
+
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark, emerald;
+}
+
+
+

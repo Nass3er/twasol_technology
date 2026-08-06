@@ -1,0 +1,40 @@
+The Problem
+The error message from Composer tells you that the spatie/image package requires a specific PHP extension called ext-exif. This extension is used to read and write EXIF metadata from image files (such as the camera model, date, and time). It's not present on your server, so Composer cannot install the package successfully.
+
+The Solution
+You need to install the missing PHP extension and then restart your web server. The exact command depends on your server's operating system.
+
+Step 1: Install the ext-exif extension
+If you are on an Ubuntu or Debian server:
+
+Bash
+
+sudo apt-get update
+sudo apt-get install php-exif
+If you are on a CentOS or Red Hat server:
+
+Bash
+
+sudo yum install php-exif
+Note: If you are using a specific PHP version (e.g., PHP 8.2), the package name might be different, like php8.2-exif.
+
+Step 2: Restart your web server
+After installing the extension, you must restart your web server and PHP's FPM process for the changes to take effect.
+
+If you are using Apache:
+
+Bash
+
+sudo service apache2 restart
+sudo service php-fpm restart
+If you are using Nginx:
+
+Bash
+
+sudo service nginx restart
+sudo service php-fpm restart
+
+
+;extension=exif
+;extension=gd
+;extension=imagick
