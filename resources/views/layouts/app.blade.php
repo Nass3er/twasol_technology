@@ -26,8 +26,13 @@
     <meta name="description" content="{{ $pageDescription }}">
     <meta name="keywords" content="{{ $pageKeywords }}">
     <meta name="author" content="Twasol Technology">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{{ $currentUrl }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}?v=2">
 
     <!-- Multi-language Hreflang Tags for Search Engines -->
     <link rel="alternate" hreflang="ar" href="{{ $arUrl }}">
