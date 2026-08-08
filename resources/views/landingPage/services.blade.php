@@ -45,18 +45,29 @@
                     </div>
                 @endif
 
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3" style="color: var(--color-primary);">
-                        {{ app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en }}
-                    </h3>
-                    <p class="text-gray-600 leading-relaxed text-sm">
-                        {{ app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en }}
-                    </p>
-                    @if($service->price)
-                        <div class="mt-4 font-bold text-lg" style="color: var(--color-primary);">
-                            {{ number_format($service->price, 0) }} $
+                <div class="p-6 flex flex-col justify-between h-full">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3" style="color: var(--color-primary);">
+                            {{ app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en }}
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed text-sm mb-4">
+                            {{ Str::limit(app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en, 120) }}
+                        </p>
+                    </div>
+
+                    <div>
+                        @if($service->price)
+                            <div class="mb-3 font-bold text-lg" style="color: var(--color-primary);">
+                                {{ number_format($service->price, 0) }} $
+                            </div>
+                        @endif
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+                            <a href="{{ localizedRoute('services.show', ['id' => $service->id]) }}" class="btn btn-sm px-4 py-2 rounded-full text-white font-bold text-xs inline-flex items-center gap-1.5 transition-all shadow-sm hover:shadow-md" style="background: var(--color-primary);">
+                                <span>{{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }}</span>
+                                <i class="fas fa-arrow-left text-[10px] rtl:rotate-0 ltr:rotate-180"></i>
+                            </a>
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
             @endforeach

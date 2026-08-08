@@ -51,6 +51,16 @@ class WebsiteController extends Controller
         return view('landingPage.services', compact('settings', 'logoPath', 'services'));
     }
 
+    public function serviceDetail($locale, $id)
+    {
+        $settings = $this->getSettings();
+        $logoPath = $this->getLogoPath();
+        $service = Service::where('active', true)->with('images')->findOrFail($id);
+        $otherServices = Service::where('active', true)->where('id', '!=', $id)->with('images')->take(3)->get();
+
+        return view('landingPage.service-detail', compact('settings', 'logoPath', 'service', 'otherServices'));
+    }
+
     public function customers()
     {
         $settings = $this->getSettings();

@@ -153,13 +153,21 @@
                         <i class="fas fa-network-wired fa-3x text-white opacity-50"></i>
                     </div>
                 @endif
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2" style="color: var(--color-primary);">
-                        {{ app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en }}
-                    </h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        {{ Str::limit(app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en, 120) }}
-                    </p>
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2" style="color: var(--color-primary);">
+                            {{ app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en }}
+                        </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            {{ Str::limit(app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en, 110) }}
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+                        <a href="{{ localizedRoute('services.show', ['id' => $service->id]) }}" class="inline-flex items-center gap-1.5 font-bold text-sm hover:underline" style="color: var(--color-primary);">
+                            <span>{{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }}</span>
+                            <i class="fas fa-arrow-left text-xs rtl:rotate-0 ltr:rotate-180"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             @endforeach

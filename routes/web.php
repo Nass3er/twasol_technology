@@ -185,6 +185,7 @@ Route::group([
     Route::get('/', [WebsiteController::class, 'home'])->name('welcome');
     Route::get('/about', [WebsiteController::class, 'about'])->name('about');
     Route::get('/services', [WebsiteController::class, 'services'])->name('services.landing');
+    Route::get('/services/{id}', [WebsiteController::class, 'serviceDetail'])->name('services.show');
     Route::get('/customers', [WebsiteController::class, 'customers'])->name('customers.landing');
     Route::get('/customer-service', [WebsiteController::class, 'customerService'])->name('customer-service');
     Route::post('/customer-service/submit', [WebsiteController::class, 'submitServiceRequest'])->name('customer-service.submit');
