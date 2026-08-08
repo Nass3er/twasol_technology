@@ -43,6 +43,11 @@ Route::get('/link-storage', function () {
     return 'Storage link created successfully!';
 });
 
+Route::get('/migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Database migrated successfully!';
+});
+
 Route::get('/clear-all-cache', function () {
     Artisan::call('view:clear');
     Artisan::call('cache:clear');
