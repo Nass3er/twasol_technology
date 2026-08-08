@@ -131,7 +131,7 @@
                         </h3>
                         <div class="space-y-4">
                             @foreach($otherServices as $other)
-                                <a href="{{ localizedRoute('services.show', ['id' => $other->id]) }}" class="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-slate-50 transition-all group">
+                                <a href="{{ localizedRoute('services.detail', ['id' => $other->id]) }}" class="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-slate-50 transition-all group">
                                     @if($other->images->isNotEmpty())
                                         <img src="{{ asset($other->images->first()->image_path) }}" alt="{{ $other->name_ar }}" class="w-14 h-14 rounded-xl object-cover shrink-0">
                                     @else

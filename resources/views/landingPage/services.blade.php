@@ -62,7 +62,7 @@
                             </div>
                         @endif
                         <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
-                            <a href="{{ localizedRoute('services.show', ['id' => $service->id]) }}" class="btn btn-sm px-4 py-2 rounded-full text-white font-bold text-xs inline-flex items-center gap-1.5 transition-all shadow-sm hover:shadow-md" style="background: var(--color-primary);">
+                            <a href="{{ localizedRoute('services.detail', ['id' => $service->id]) }}" class="btn btn-sm px-4 py-2 rounded-full text-white font-bold text-xs inline-flex items-center gap-1.5 transition-all shadow-sm hover:shadow-md" style="background: var(--color-primary);">
                                 <span>{{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }}</span>
                                 <i class="fas fa-arrow-left text-[10px] rtl:rotate-0 ltr:rotate-180"></i>
                             </a>

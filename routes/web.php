@@ -20,6 +20,12 @@ if (!function_exists('localizedRoute')) {
         if (str_starts_with($name, 'http')) {
             return $name;
         }
+        if (!is_array($parameters)) {
+            $parameters = ['id' => $parameters];
+        }
+        if (!isset($parameters['locale'])) {
+            $parameters['locale'] = app()->getLocale();
+        }
         try {
             return route($name, $parameters, $absolute);
         } catch (\Exception $e) {
@@ -185,7 +191,7 @@ Route::group([
     Route::get('/', [WebsiteController::class, 'home'])->name('welcome');
     Route::get('/about', [WebsiteController::class, 'about'])->name('about');
     Route::get('/services', [WebsiteController::class, 'services'])->name('services.landing');
-    Route::get('/services/{id}', [WebsiteController::class, 'serviceDetail'])->name('services.show');
+    Route::get('/services/{id}', [WebsiteController::class, 'serviceDetail'])->name('services.detail');
     Route::get('/customers', [WebsiteController::class, 'customers'])->name('customers.landing');
     Route::get('/customer-service', [WebsiteController::class, 'customerService'])->name('customer-service');
     Route::post('/customer-service/submit', [WebsiteController::class, 'submitServiceRequest'])->name('customer-service.submit');

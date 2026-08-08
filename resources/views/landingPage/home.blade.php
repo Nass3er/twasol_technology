@@ -163,7 +163,7 @@
                         </p>
                     </div>
                     <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
-                        <a href="{{ localizedRoute('services.show', ['id' => $service->id]) }}" class="inline-flex items-center gap-1.5 font-bold text-sm hover:underline" style="color: var(--color-primary);">
+                        <a href="{{ localizedRoute('services.detail', ['id' => $service->id]) }}" class="inline-flex items-center gap-1.5 font-bold text-sm hover:underline" style="color: var(--color-primary);">
                             <span>{{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }}</span>
                             <i class="fas fa-arrow-left text-xs rtl:rotate-0 ltr:rotate-180"></i>
                         </a>
