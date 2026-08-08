@@ -86,8 +86,8 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'images/Footer_Logo.png',
-            'alt' => 'Auth Logo',
+            'path' => 'images/twasol_logo.png',
+            'alt' => 'Twasol Logo',
             'class' => '',
             'width' => 50,
             'height' => 50,
@@ -113,10 +113,8 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            // 'path' => asset('images/Footer_Logo.png'),
-            'path' => 'images/Footer_Logo.png',
-            // 'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'Ayccl Preloader Image',
+            'path' => 'images/twasol_logo.png',
+            'alt' => 'Twasol Technology Preloader',
             'effect' => 'animation__shake',
             'width' => 100,
             'height' => 100,

@@ -44,8 +44,10 @@
         </div>
 
         <!-- Mobile Menu Toggle Button -->
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded" style="color: var(--color-primary);">
-            <i class="fas fa-bars fa-lg"></i>
+        <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center transition-all hover:bg-gray-100" style="color: var(--color-primary, #1e293b); background: #ffffff;" aria-label="Toggle Navigation">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
         </button>
     </div>
 
