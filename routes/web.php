@@ -89,6 +89,29 @@ Route::get('/uploads/{path}', function ($path) {
     abort(404);
 })->where('path', '.*');
 
+// Dynamic Public Images Fallback Route (Guarantees public images display on all hosting environments)
+Route::get('/images/{path}', function ($path) {
+    $possiblePaths = [
+        public_path('images/' . $path),
+        base_path('public/images/' . $path),
+        base_path('public_html/images/' . $path),
+        base_path('../public_html/images/' . $path),
+        storage_path('app/public/images/' . $path),
+    ];
+
+    foreach ($possiblePaths as $file) {
+        if (file_exists($file) && is_file($file)) {
+            $mimeType = mime_content_type($file) ?: 'image/jpeg';
+            return response()->file($file, [
+                'Content-Type' => $mimeType,
+                'Cache-Control' => 'public, max-age=31536000',
+            ]);
+        }
+    }
+
+    abort(404);
+})->where('path', '.*');
+
 // Default root: redirect to locale
 Route::get('/', function () {
     $locale = Session::get('locale') ?? app()->getLocale();
