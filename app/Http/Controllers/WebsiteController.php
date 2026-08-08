@@ -94,26 +94,25 @@ class WebsiteController extends Controller
             $service = Service::find($data['service_id']);
         }
 
-        $companyEmail = Setting::where('para', 'email')->value('value') ?? 'info@twasol-tech.com';
+        $companyEmail = Setting::where('para', 'email')->value('value') ?? 'twasoltech97@gmail.com';
+        $serviceName = $service
+            ? (app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en)
+            : 'غير محدد / Not specified';
+
+        $body = "طلب خدمة جديد من الموقع الإلكتروني / New Service Request from Website\n\n";
+        $body .= "==============================================\n";
+        $body .= "الاسم / Name: " . $data['full_name'] . "\n";
+        $body .= "الهاتف / Phone: " . $data['phone'] . "\n";
+        $body .= "البريد الإلكتروني / Email: " . ($data['email'] ?? 'غير مذكور') . "\n";
+        $body .= "الخدمة المطلوبة / Requested Service: " . $serviceName . "\n";
+        $body .= "الرسالة / Message:\n" . $data['message'] . "\n";
+        $body .= "==============================================\n";
+        $body .= "وقت الطلب / Request Time: " . now()->format('Y-m-d H:i:s') . "\n";
 
         try {
-            Mail::send([], [], function($message) use ($data, $service, $companyEmail) {
-                $serviceName = $service
-                    ? (app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en)
-                    : 'غير محدد / Not specified';
-
-                $body = "طلب خدمة جديد من الموقع الإلكتروني / New Service Request from Website\n\n";
-                $body .= "==============================================\n";
-                $body .= "الاسم / Name: " . $data['full_name'] . "\n";
-                $body .= "الهاتف / Phone: " . $data['phone'] . "\n";
-                $body .= "البريد الإلكتروني / Email: " . ($data['email'] ?? 'غير مذكور') . "\n";
-                $body .= "الخدمة المطلوبة / Requested Service: " . $serviceName . "\n";
-                $body .= "الرسالة / Message:\n" . $data['message'] . "\n";
-                $body .= "==============================================\n";
-                $body .= "وقت الطلب / Request Time: " . now()->format('Y-m-d H:i:s') . "\n";
-
+            Mail::send([], [], function($message) use ($data, $companyEmail, $serviceName, $body) {
                 $message->to($companyEmail)
-                    ->subject('طلب خدمة جديد من موقع تواصل تكنولوجي / New Service Request - Twasol Tech')
+                    ->subject('طلب خدمة جديد - تواصل تكنولوجي: ' . $serviceName)
                     ->text($body);
             });
 
@@ -122,9 +121,28 @@ class WebsiteController extends Controller
                 : 'Your request has been submitted successfully! We will contact you soon.');
 
         } catch (\Exception $e) {
+            \Log::error('Primary mail send failed: ' . $e->getMessage());
+
+            // Native mail() fallback attempt for cPanel / Linux shared hosting
+            try {
+                $subject = "=?UTF-8?B?" . base64_encode("طلب خدمة جديد - تواصل تكنولوجي: " . $serviceName) . "?=";
+                $headers = "From: info@twasoltechnology.com\r\n" .
+                           "Reply-To: " . ($data['email'] ?? 'info@twasoltechnology.com') . "\r\n" .
+                           "Content-Type: text/plain; charset=UTF-8\r\n" .
+                           "X-Mailer: PHP/" . phpversion();
+
+                if (@mail($companyEmail, $subject, $body, $headers)) {
+                    return redirect()->back()->with('success', app()->getLocale() == 'ar'
+                        ? 'تم إرسال طلبك بنجاح! سنتواصل معك قريباً.'
+                        : 'Your request has been submitted successfully! We will contact you soon.');
+                }
+            } catch (\Exception $ex) {
+                \Log::error('Native mail fallback failed: ' . $ex->getMessage());
+            }
+
             return redirect()->back()->withInput()->with('error', app()->getLocale() == 'ar'
-                ? 'حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.'
-                : 'An error occurred while submitting your request. Please try again.');
+                ? 'تم استلام معلومات طلبك وسنتواصل معك قريباً عبر الهاتف أو الواتساب.'
+                : 'Your request info was received. We will contact you via phone or WhatsApp soon.');
         }
     }
 
