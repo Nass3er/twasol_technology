@@ -31,6 +31,11 @@ if (!function_exists('localizedRoute')) {
 // Sitemap Route for Search Engine Crawlers
 Route::get('/sitemap.xml', [WebsiteController::class, 'sitemap'])->name('sitemap');
 
+Route::get('/link-storage', function () {
+    Artisan::call('storage:link');
+    return 'Storage link created successfully!';
+});
+
 // Default root: redirect to locale
 Route::get('/', function () {
     $locale = Session::get('locale') ?? app()->getLocale();
