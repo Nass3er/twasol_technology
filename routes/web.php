@@ -45,6 +45,27 @@ Route::get('/clear-all-cache', function () {
     return 'All cache (Views, Application Cache, Config, Routes) cleared successfully!';
 });
 
+// Explicit Favicon route with no-cache headers to force browser update
+Route::get('/favicon.ico', function () {
+    $possibleFiles = [
+        public_path('favicon.ico'),
+        base_path('public/favicon.ico'),
+        base_path('public_html/favicon.ico'),
+        base_path('../public_html/favicon.ico'),
+    ];
+    foreach ($possibleFiles as $file) {
+        if (file_exists($file) && is_file($file)) {
+            return response()->file($file, [
+                'Content-Type' => 'image/x-icon',
+                'Cache-Control' => 'no-cache, no-store, must-revalidate, max-age=0',
+                'Pragma' => 'no-cache',
+                'Expires' => '0',
+            ]);
+        }
+    }
+    abort(404);
+});
+
 // Dynamic Uploaded Files Fallback Route (Guarantees image display on all hosting environments)
 Route::get('/uploads/{path}', function ($path) {
     $possiblePaths = [
