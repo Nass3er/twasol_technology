@@ -48,6 +48,17 @@ class SettingsController extends Controller
                 @mkdir($uploadDir, 0755, true);
             }
 
+            $altDirs = [
+                base_path('public/uploads/settings'),
+                base_path('public_html/uploads/settings'),
+                base_path('../public_html/uploads/settings'),
+            ];
+            foreach ($altDirs as $altDir) {
+                if (!file_exists($altDir) && file_exists(dirname($altDir))) {
+                    @mkdir($altDir, 0755, true);
+                }
+            }
+
             $logoSetting = Setting::where('para', 'logo')->first();
             if ($logoSetting && $logoSetting->imagepath && file_exists(public_path($logoSetting->imagepath))) {
                 @unlink(public_path($logoSetting->imagepath));
@@ -57,6 +68,12 @@ class SettingsController extends Controller
             $fileName = 'logo_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move($uploadDir, $fileName);
             $logoPath = 'uploads/settings/' . $fileName;
+
+            foreach ($altDirs as $altDir) {
+                if (file_exists($altDir) && realpath($altDir) !== realpath($uploadDir)) {
+                    @copy($uploadDir . '/' . $fileName, $altDir . '/' . $fileName);
+                }
+            }
 
             Setting::where('para', 'logo')->update([
                 'imagepath' => $logoPath,

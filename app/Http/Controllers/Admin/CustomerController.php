@@ -40,10 +40,28 @@ class CustomerController extends Controller
             if (!file_exists($uploadDir)) {
                 @mkdir($uploadDir, 0755, true);
             }
+
+            $altDirs = [
+                base_path('public/uploads/customers'),
+                base_path('public_html/uploads/customers'),
+                base_path('../public_html/uploads/customers'),
+            ];
+            foreach ($altDirs as $altDir) {
+                if (!file_exists($altDir) && file_exists(dirname($altDir))) {
+                    @mkdir($altDir, 0755, true);
+                }
+            }
+
             $file = $request->file('logo');
             $fileName = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move($uploadDir, $fileName);
             $data['logo'] = 'uploads/customers/' . $fileName;
+
+            foreach ($altDirs as $altDir) {
+                if (file_exists($altDir) && realpath($altDir) !== realpath($uploadDir)) {
+                    @copy($uploadDir . '/' . $fileName, $altDir . '/' . $fileName);
+                }
+            }
         }
 
         $customer = Customer::create($data);

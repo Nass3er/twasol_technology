@@ -78,10 +78,28 @@ class ServiceController extends Controller
             if (!file_exists($uploadDir)) {
                 @mkdir($uploadDir, 0755, true);
             }
+
+            $altDirs = [
+                base_path('public/uploads/services'),
+                base_path('public_html/uploads/services'),
+                base_path('../public_html/uploads/services'),
+            ];
+            foreach ($altDirs as $altDir) {
+                if (!file_exists($altDir) && file_exists(dirname($altDir))) {
+                    @mkdir($altDir, 0755, true);
+                }
+            }
+
             foreach ($request->file('images') as $file) {
                 $fileName = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
                 $file->move($uploadDir, $fileName);
                 $filePath = 'uploads/services/' . $fileName;
+
+                foreach ($altDirs as $altDir) {
+                    if (file_exists($altDir) && realpath($altDir) !== realpath($uploadDir)) {
+                        @copy($uploadDir . '/' . $fileName, $altDir . '/' . $fileName);
+                    }
+                }
 
                 $service->images()->create([
                     'image_path' => $filePath

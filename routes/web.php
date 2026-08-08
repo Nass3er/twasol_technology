@@ -45,6 +45,29 @@ Route::get('/clear-all-cache', function () {
     return 'All cache (Views, Application Cache, Config, Routes) cleared successfully!';
 });
 
+// Dynamic Uploaded Files Fallback Route (Guarantees image display on all hosting environments)
+Route::get('/uploads/{path}', function ($path) {
+    $possiblePaths = [
+        public_path('uploads/' . $path),
+        base_path('public/uploads/' . $path),
+        base_path('public_html/uploads/' . $path),
+        base_path('../public_html/uploads/' . $path),
+        storage_path('app/public/uploads/' . $path),
+    ];
+
+    foreach ($possiblePaths as $file) {
+        if (file_exists($file) && is_file($file)) {
+            $mimeType = mime_content_type($file) ?: 'image/jpeg';
+            return response()->file($file, [
+                'Content-Type' => $mimeType,
+                'Cache-Control' => 'public, max-age=31536000',
+            ]);
+        }
+    }
+
+    abort(404);
+})->where('path', '.*');
+
 // Default root: redirect to locale
 Route::get('/', function () {
     $locale = Session::get('locale') ?? app()->getLocale();
