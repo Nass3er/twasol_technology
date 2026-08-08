@@ -181,30 +181,182 @@
 </section>
 @endif
 
-{{-- CUSTOMERS SECTION --}}
-@if($customers->isNotEmpty())
-<section style="padding: 80px 0; background: #fff;">
+{{-- CUSTOMERS SECTION (TWO HORIZONTAL SLIDERS) --}}
+@if((isset($latestCustomers) && $latestCustomers->isNotEmpty()) || (isset($oldestCustomers) && $oldestCustomers->isNotEmpty()))
+<section style="padding: 70px 0; background: #ffffff; overflow: hidden;">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl font-bold mb-4" style="color: var(--color-primary);">
-                {{ app()->getLocale() == 'ar' ? 'عملاؤنا' : 'Our Customers' }}
+        
+        <!-- Section Header -->
+        <div class="text-center mb-10" data-aos="fade-up">
+            <h2 class="text-3xl font-extrabold mb-3" style="color: var(--color-primary);">
+                {{ app()->getLocale() == 'ar' ? 'شركاء النجاح وعملاؤنا' : 'Our Valued Clients' }}
             </h2>
-            <div style="width: 60px; height: 4px; background: var(--color-primary); margin: 0 auto;"></div>
+            <p class="text-slate-500 text-sm max-w-lg mx-auto">
+                {{ app()->getLocale() == 'ar' ? 'تفخر تواصل تكنولوجي بتقديم خدماتها لكبرى المؤسسات والشركات' : 'Twasol Technology is proud to serve leading enterprises and organizations' }}
+            </p>
+            <div style="width: 50px; height: 4px; background: var(--color-primary); margin: 12px auto 0; border-radius: 2px;"></div>
         </div>
-        <div class="flex flex-wrap justify-center gap-8">
-            @foreach($customers->where('active', true)->take(8) as $customer)
-            <div class="text-center" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 80 }}">
-                @if($customer->logo)
-                    <img src="{{ asset($customer->logo) }}" alt="{{ $customer->name_ar }}" style="height: 60px; max-width: 120px; object-fit: contain; filter: grayscale(50%); transition: filter 0.3s;" class="hover:filter-none mx-auto">
-                @else
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-white font-bold text-xl" style="background: var(--color-primary);">
-                        {{ mb_substr($customer->name_ar, 0, 1) }}
-                    </div>
-                @endif
-                <p class="text-sm text-gray-500 mt-2">{{ app()->getLocale() == 'ar' ? $customer->name_ar : $customer->name_en }}</p>
+
+        <style>
+            .customers-slider-container {
+                position: relative;
+                margin-bottom: 32px;
+            }
+            .customers-scroll-row {
+                display: flex;
+                gap: 20px;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                padding: 12px 6px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(71, 102, 225, 0.25) transparent;
+            }
+            .customers-scroll-row::-webkit-scrollbar {
+                height: 5px;
+            }
+            .customers-scroll-row::-webkit-scrollbar-thumb {
+                background: rgba(71, 102, 225, 0.3);
+                border-radius: 10px;
+            }
+            .customer-scroll-card {
+                width: 190px;
+                flex: 0 0 190px;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 20px;
+                padding: 20px 14px;
+                text-align: center;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+                transition: all 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .customer-scroll-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+                border-color: var(--color-primary);
+            }
+            .slider-title-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 13px;
+                font-weight: 700;
+                color: var(--color-primary);
+                background: rgba(71, 102, 225, 0.08);
+                padding: 4px 14px;
+                border-radius: 50px;
+                margin-bottom: 12px;
+            }
+            .scroll-btn {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background: #ffffff;
+                border: 1px solid #cbd5e1;
+                color: #334155;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+                transition: all 0.2s ease;
+            }
+            .scroll-btn:hover {
+                background: var(--color-primary);
+                color: #ffffff;
+                border-color: var(--color-primary);
+            }
+        </style>
+
+        <!-- FIRST SLIDER: NEWEST 8 CUSTOMERS -->
+        @if(isset($latestCustomers) && $latestCustomers->isNotEmpty())
+        <div class="customers-slider-container" data-aos="fade-up">
+            <div class="flex items-center justify-between mb-2">
+                <span class="slider-title-badge">
+                    <i class="fas fa-sparkles text-xs"></i>
+                    <span>{{ app()->getLocale() == 'ar' ? 'أحدث العملاء (8)' : 'Newest Clients (8)' }}</span>
+                </span>
+                
+                <div class="flex items-center gap-2">
+                    <button type="button" class="scroll-btn" onclick="document.getElementById('latest-customers-row').scrollBy({left: -250, behavior: 'smooth'})" aria-label="Previous">
+                        <i class="fas fa-chevron-right text-xs rtl:rotate-0 ltr:rotate-180"></i>
+                    </button>
+                    <button type="button" class="scroll-btn" onclick="document.getElementById('latest-customers-row').scrollBy({left: 250, behavior: 'smooth'})" aria-label="Next">
+                        <i class="fas fa-chevron-left text-xs rtl:rotate-0 ltr:rotate-180"></i>
+                    </button>
+                </div>
             </div>
-            @endforeach
+
+            <div id="latest-customers-row" class="customers-scroll-row">
+                @foreach($latestCustomers as $customer)
+                <div class="customer-scroll-card">
+                    @if($customer->logo)
+                        <img src="{{ asset($customer->logo) }}" alt="{{ $customer->name_ar }}" style="height: 60px; width: 100%; object-fit: contain; filter: grayscale(30%); transition: filter 0.3s;" class="hover:filter-none">
+                    @else
+                        <div style="width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), #1e293b); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;">
+                            {{ mb_substr($customer->name_ar, 0, 1) }}
+                        </div>
+                    @endif
+                    <h4 class="text-xs font-bold text-slate-800 mt-3 truncate w-full">
+                        {{ app()->getLocale() == 'ar' ? $customer->name_ar : $customer->name_en }}
+                    </h4>
+                </div>
+                @endforeach
+            </div>
         </div>
+        @endif
+
+        <!-- SECOND SLIDER: OLDEST 8 CUSTOMERS -->
+        @if(isset($oldestCustomers) && $oldestCustomers->isNotEmpty())
+        <div class="customers-slider-container" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center justify-between mb-2">
+                <span class="slider-title-badge" style="background: rgba(16, 185, 129, 0.08); color: #059669;">
+                    <i class="fas fa-award text-xs"></i>
+                    <span>{{ app()->getLocale() == 'ar' ? 'شركاء المسيرة (8)' : 'Long-standing Clients (8)' }}</span>
+                </span>
+                
+                <div class="flex items-center gap-2">
+                    <button type="button" class="scroll-btn" onclick="document.getElementById('oldest-customers-row').scrollBy({left: -250, behavior: 'smooth'})" aria-label="Previous">
+                        <i class="fas fa-chevron-right text-xs rtl:rotate-0 ltr:rotate-180"></i>
+                    </button>
+                    <button type="button" class="scroll-btn" onclick="document.getElementById('oldest-customers-row').scrollBy({left: 250, behavior: 'smooth'})" aria-label="Next">
+                        <i class="fas fa-chevron-left text-xs rtl:rotate-0 ltr:rotate-180"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="oldest-customers-row" class="customers-scroll-row">
+                @foreach($oldestCustomers as $customer)
+                <div class="customer-scroll-card">
+                    @if($customer->logo)
+                        <img src="{{ asset($customer->logo) }}" alt="{{ $customer->name_ar }}" style="height: 60px; width: 100%; object-fit: contain; filter: grayscale(30%); transition: filter 0.3s;" class="hover:filter-none">
+                    @else
+                        <div style="width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, #059669, #065f46); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;">
+                            {{ mb_substr($customer->name_ar, 0, 1) }}
+                        </div>
+                    @endif
+                    <h4 class="text-xs font-bold text-slate-800 mt-3 truncate w-full">
+                        {{ app()->getLocale() == 'ar' ? $customer->name_ar : $customer->name_en }}
+                    </h4>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        <!-- BUTTON TO VIEW ALL CUSTOMERS -->
+        <div class="text-center mt-6" data-aos="fade-up">
+            <a href="{{ localizedRoute('customers.landing') }}" class="btn px-8 py-3.5 rounded-full text-white font-bold inline-flex items-center gap-2 shadow-lg transition-all hover:scale-[1.03]" style="background: var(--color-primary);">
+                <i class="fas fa-users text-sm"></i>
+                <span>{{ app()->getLocale() == 'ar' ? 'كل العملاء' : 'All Customers' }}</span>
+                <i class="fas fa-arrow-left text-xs rtl:rotate-0 ltr:rotate-180"></i>
+            </a>
+        </div>
+
     </div>
 </section>
 @endif

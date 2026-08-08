@@ -28,9 +28,10 @@ class WebsiteController extends Controller
         $logoPath = $this->getLogoPath();
         $services = Service::where('active', true)->with('images')->take(6)->get();
         $statistics = Statistic::where('active', true)->get();
-        $customers = Customer::where('active', true)->with('services')->take(8)->get();
+        $latestCustomers = Customer::where('active', true)->with('services')->latest()->take(8)->get();
+        $oldestCustomers = Customer::where('active', true)->with('services')->oldest()->take(8)->get();
 
-        return view('landingPage.home', compact('settings', 'logoPath', 'services', 'statistics', 'customers'));
+        return view('landingPage.home', compact('settings', 'logoPath', 'services', 'statistics', 'latestCustomers', 'oldestCustomers'));
     }
 
     public function about()
