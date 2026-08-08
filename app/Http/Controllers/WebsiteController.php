@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\Customer;
 use App\Models\Statistic;
 use App\Models\Setting;
+use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -95,10 +96,25 @@ class WebsiteController extends Controller
             $service = Service::find($data['service_id']);
         }
 
-        $companyEmail = Setting::where('para', 'email')->value('value') ?? 'twasoltech97@gmail.com';
+        $companyEmail = Setting::where('para', 'email')->value('value') ?: 'twasoltech97@gmail.com';
         $serviceName = $service
             ? (app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en)
             : 'غير محدد / Not specified';
+
+        // 1. Permanently Save to Database (Failsafe: Request is 100% saved even if mail server fails)
+        try {
+            ServiceRequest::create([
+                'full_name' => $data['full_name'],
+                'email' => $data['email'] ?? null,
+                'phone' => $data['phone'],
+                'service_id' => $data['service_id'] ?? null,
+                'service_name' => $serviceName,
+                'message' => $data['message'],
+                'status' => 'pending',
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('DB ServiceRequest create error: ' . $e->getMessage());
+        }
 
         $body = "طلب خدمة جديد من الموقع الإلكتروني / New Service Request from Website\n\n";
         $body .= "==============================================\n";

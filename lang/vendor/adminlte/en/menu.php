@@ -78,4 +78,5 @@ return [
 'settings' => 'Settings',
 'mailSettings' => 'Mail Settings',
 'statistics' => 'Statistics',
+'service_requests_menu' => 'Received Service Requests',
 ];

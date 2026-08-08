@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\Settings\MailSettingController;
+use App\Http\Controllers\Admin\ServiceRequestController;
 use App\Http\Controllers\Admin\Users\UsersManagementtController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
@@ -161,6 +162,9 @@ Route::group([
         // Statistics
         Route::resource('statistics', StatisticController::class);
         Route::put('statistics/{id}/toggle-active', [StatisticController::class, 'toggleActive'])->name('statistics.toggleActive');
+
+        // Received Service Requests
+        Route::resource('service-requests', ServiceRequestController::class)->only(['index', 'destroy']);
 
         // Company Settings
         Route::get('/settings', [SettingsController::class, 'index'])->name('admin.settings.index');

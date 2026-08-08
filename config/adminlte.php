@@ -425,6 +425,12 @@ return [
         ],
         ['header' => 'main_management'],
         [
+            'text' => 'service_requests_menu',
+            'icon' => 'fas fa-inbox',
+            'route' => 'service-requests.index',
+            'active' => ['*service-requests*'],
+        ],
+        [
             'text' => 'services_menu',
             'icon' => 'fas fa-network-wired',
             'route' => 'services.index',

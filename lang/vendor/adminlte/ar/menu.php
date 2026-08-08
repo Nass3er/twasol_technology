@@ -73,4 +73,5 @@ return [
 'settings' => 'الإعدادات',
     'mailSettings' => 'إعدادات البريد',
     'statistics' => 'الإحصائيات',
+    'service_requests_menu' => 'طلبات الخدمات المستلمة',
 ];
