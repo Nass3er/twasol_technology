@@ -34,26 +34,26 @@
             </a>
         </nav>
 
-        <!-- Right Buttons (Lang) -->
-        <div class="hidden lg:flex items-center gap-4">
-            <!-- Language Switcher -->
-            <a href="{{ route('lang.switch', ['locale' => app()->getLocale(), 'lang' => app()->getLocale() == 'ar' ? 'en' : 'ar']) }}" class="btn btn-sm btn-outline rounded-full font-bold px-4" style="border-color: var(--color-primary); color: var(--color-primary);">
-                <i class="fas fa-globe mr-1"></i>
-                {{ app()->getLocale() == 'ar' ? 'English' : 'العربية' }}
+        <!-- Right Actions (Language Switcher & Mobile Menu Button) -->
+        <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Language Switcher (Visible on both Desktop and Mobile) -->
+            <a href="{{ route('lang.switch', ['locale' => app()->getLocale(), 'lang' => app()->getLocale() == 'ar' ? 'en' : 'ar']) }}" class="btn btn-sm btn-outline rounded-full font-bold px-3 sm:px-4 text-xs sm:text-sm flex items-center gap-1.5 transition-all" style="border-color: var(--color-primary); color: var(--color-primary);">
+                <i class="fas fa-globe"></i>
+                <span>{{ app()->getLocale() == 'ar' ? 'English' : 'العربية' }}</span>
             </a>
-        </div>
 
-        <!-- Mobile Menu Toggle Button -->
-        <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center transition-all hover:bg-gray-100" style="color: var(--color-primary, #1e293b); background: #ffffff;" aria-label="Toggle Navigation">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center transition-all hover:bg-gray-100" style="color: var(--color-primary, #1e293b); background: #ffffff;" aria-label="Toggle Navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
     </div>
 
     <!-- Mobile Dropdown Menu -->
     <div id="mobile-menu" class="hidden lg:hidden" style="background: var(--color-secondary); border-top: 1px solid rgba(0,0,0,0.08);">
-        <div class="flex flex-col gap-4 p-4">
+        <div class="flex flex-col gap-3 p-4">
             <a href="{{ localizedRoute('welcome') }}" class="font-semibold py-2 border-b border-gray-100" style="color: var(--color-primary);">
                 {{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}
             </a>
@@ -72,12 +72,6 @@
             <a href="{{ localizedRoute('contact') }}" class="font-semibold py-2 border-b border-gray-100" style="color: var(--color-primary);">
                 {{ app()->getLocale() == 'ar' ? 'تواصل معنا' : 'Contact' }}
             </a>
-            <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                <a href="{{ route('lang.switch', ['locale' => app()->getLocale(), 'lang' => app()->getLocale() == 'ar' ? 'en' : 'ar']) }}" class="btn btn-outline rounded-full text-center" style="border-color: var(--color-primary); color: var(--color-primary);">
-                    <i class="fas fa-globe mr-1"></i>
-                    {{ app()->getLocale() == 'ar' ? 'English' : 'العربية' }}
-                </a>
-            </div>
         </div>
     </div>
 </header>
