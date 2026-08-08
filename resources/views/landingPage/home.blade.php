@@ -278,7 +278,7 @@
             <div class="flex items-center justify-between mb-2">
                 <span class="slider-title-badge">
                     <i class="fas fa-sparkles text-xs"></i>
-                    <span>{{ app()->getLocale() == 'ar' ? 'أحدث العملاء (8)' : 'Newest Clients (8)' }}</span>
+                    <span>{{ app()->getLocale() == 'ar' ? 'أحدث العملاء' : 'Newest Clients ' }}</span>
                 </span>
                 
                 <div class="flex items-center gap-2">
@@ -314,11 +314,15 @@
         @if(isset($oldestCustomers) && $oldestCustomers->isNotEmpty())
         <div class="customers-slider-container" data-aos="fade-up" data-aos-delay="100">
             <div class="flex items-center justify-between mb-2">
-                <span class="slider-title-badge" style="background: rgba(16, 185, 129, 0.08); color: #059669;">
+                <!-- <span class="slider-title-badge" style="background: rgba(16, 185, 129, 0.08); color: #059669;">
                     <i class="fas fa-award text-xs"></i>
                     <span>{{ app()->getLocale() == 'ar' ? 'شركاء المسيرة (8)' : 'Long-standing Clients (8)' }}</span>
+                </span> -->
+                <span class="slider-title-badge">
+                    <span></span>
                 </span>
-                
+            
+            
                 <div class="flex items-center gap-2">
                     <button type="button" class="scroll-btn" onclick="document.getElementById('oldest-customers-row').scrollBy({left: -250, behavior: 'smooth'})" aria-label="Previous">
                         <i class="fas fa-chevron-right text-xs rtl:rotate-0 ltr:rotate-180"></i>
