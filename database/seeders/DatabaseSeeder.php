@@ -98,10 +98,17 @@ class DatabaseSeeder extends Seeder
                 'price' => null
             ],
             [
-                'name_ar' => 'الربط الشبكي عبر Radmin VPN',
-                'name_en' => 'Branch Connection via Radmin VPN',
-                'description_ar' => 'إنشاء شبكات افتراضية خاصة ومجانية باستخدام Radmin VPN لربط الفروع والأجهزة بسرعة، أمان، وسهولة تامة.',
-                'description_en' => 'Creating free, secure virtual private networks using Radmin VPN to connect branches and devices quickly, securely, and easily.',
+                'name_ar' => 'الحلول السحابية (Cloud Solutions)',
+                'name_en' => 'Cloud Solutions',
+                'description_ar' => 'نوفر لمؤسستك بيئة سحابية فائقة الأداء تضمن استمرارية أعمالك بكفاءة وأمان تام. تمتاز سيرفراتنا السحابية بالمرونة العالية والقدرة على التوسع الفوري لتلبية تطلعات نمو مشاريعك، مع حماية متكاملة ودعم فني متواصل لضمان تشغيل تطبيقاتك دون انقطاع.',
+                'description_en' => 'We provide your organization with a high-performance cloud environment that ensures business continuity with efficiency and security. Our cloud servers offer high flexibility and instant scalability with complete protection and support.',
+                'price' => null
+            ],
+            [
+                'name_ar' => 'خدمة استعادة قواعد البيانات المتضررة والمشفرة',
+                'name_en' => 'Encrypted & Damaged Database Recovery Service',
+                'description_ar' => 'نساعدك في إنقاذ عملك بعد هجمات الفدية دون الحاجة لفك تشفير كامل النظام. نركز مباشرة على استخراج البيانات من (Oracle, SQL Server, MySQL). الفحص والتأهيل: معاينة السيرفر مجاناً لتحديد امكانية استخراج ملفات قاعدة البيانات. التقييم المالي: تقديم عرض سعر شفاف بناءً على حجم البيانات ونوع النظام. الاستخراج والتسليم: إصلاح بناء البيانات، فحص سلامة الجداول، وتسليمك قاعدة بيانات جاهزة للتشغيل المباشر.',
+                'description_en' => 'We help rescue your business after ransomware attacks without needing to decrypt the entire system. We focus directly on data extraction from Oracle, SQL Server, and MySQL with free inspection, transparent evaluation, and DB repair.',
                 'price' => null
             ]
         ];

@@ -7,7 +7,7 @@
                 {{ app()->getLocale() == 'ar' ? ($settings['company_name_ar'] ?? 'تواصل تكنولوجي') : ($settings['company_name_en'] ?? 'Twasol Technology') }}
             </span>
             <p class="text-sm leading-relaxed mb-4">
-                {{ app()->getLocale() == 'ar' ? 'حلول الربط الشبكي المتقدمة لربط الفروع عن بعد باستخدام VMware, Citrix, TSplus, Radmin VPN وغيرها من التقنيات الرائدة بضمان استقرار الخدمة.' : 'Advanced networking solutions connecting branches remotely using VMware, Citrix, TSplus, Radmin VPN and other leading technologies with guaranteed stability.' }}
+                {{ app()->getLocale() == 'ar' ? 'حلول الربط الشبكي المتقدمة والحلول السحابية واستعادة قواعد البيانات المتضررة باستخدام أفضل التقنيات الرائدة بضمان استقرار الخدمة.' : 'Advanced networking, cloud solutions, and encrypted database recovery using leading technologies with guaranteed stability.' }}
             </p>
             <div class="flex gap-3">
                 @if(!empty($settings['facebook']))

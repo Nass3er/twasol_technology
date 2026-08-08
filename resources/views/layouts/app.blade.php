@@ -9,7 +9,7 @@
         $pageDescription = $__env->yieldContent('meta_description', app()->getLocale() == 'ar' 
             ? ($settings['about_ar'] ?? 'تواصل تكنولوجي - نقدم أحدث حلول الربط الشبكي بين الفروع والأنظمة والتحكم السحابي بأعلى درجات الأمان والاستقرار.') 
             : ($settings['about_en'] ?? 'Twasol Technology - Providing advanced networking solutions to connect branches remotely with highest security and stability.'));
-        $pageKeywords = $__env->yieldContent('meta_keywords', 'ربط شبكي, VMware, Citrix, TSplus, Radmin VPN, عقود صيانة, IT solutions, تواصل تواصل تكنولوجي, شبكات, اليمن');
+        $pageKeywords = $__env->yieldContent('meta_keywords', 'ربط شبكي, VMware, Citrix, TSplus, حلول سحابية, استعادة قواعد البيانات, عقود صيانة, IT solutions, تواصل تكنولوجي, شبكات, اليمن');
         $pageOgImage = $__env->yieldContent('og_image', isset($logoPath) && $logoPath ? asset($logoPath) : asset('images/twasol_logo.png'));
         $currentUrl = url()->current();
         $currentLocale = app()->getLocale();

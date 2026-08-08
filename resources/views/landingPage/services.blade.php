@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', app()->getLocale() == 'ar' ? 'خدماتنا - تواصل تكنولوجي' : 'Our Services - Twasol Technology')
-@section('meta_description', app()->getLocale() == 'ar' ? 'استعرض خدمات الربط الشبكي بين الفروع عبر VMware و Citrix و TSplus و Radmin VPN المقدمة من شركة تواصل تكنولوجي.' : 'Explore branch networking services via VMware, Citrix, TSplus, and Radmin VPN by Twasol Technology.')
-@section('meta_keywords', 'ربط فروع, VMware, Citrix, TSplus, Radmin VPN, شبكات افتراضية, تواصل تكنولوجي, خدمات شبكية')
+@section('meta_description', app()->getLocale() == 'ar' ? 'استعرض خدمات الربط الشبكي، الحلول السحابية، واستعادة قواعد البيانات المتضررة والمشفرة المقدمة من شركة تواصل تكنولوجي.' : 'Explore branch networking, cloud solutions, and encrypted database recovery services by Twasol Technology.')
+@section('meta_keywords', 'ربط فروع, VMware, Citrix, TSplus, حلول سحابية, استعادة قواعد البيانات, تواصل تكنولوجي, خدمات شبكية')
 
 @section('content')
 
