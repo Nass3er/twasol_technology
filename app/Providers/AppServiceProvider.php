@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (app()->environment('production')) {
-        URL::forceScheme('https');
-        URL::forceRootUrl(config('app.url'));
-      }
+            URL::forceScheme('https');
+            URL::forceRootUrl(config('app.url'));
+        }
       
         if (!app()->runningInConsole()) {
             // Load mail settings from database
@@ -40,15 +40,21 @@ class AppServiceProvider extends ServiceProvider
                     ])->get()->keyBy('para');
 
                     if ($mailSettings->isNotEmpty()) {
+                        $mailer   = $mailSettings['mail_mailer']->value ?? 'sendmail';
+                        $enc      = $mailSettings['mail_encryption']->value ?? null;
+                        $encNorm  = ($enc === 'null' || $enc === '' || $enc === null) ? null : $enc;
+
                         config([
-                            'mail.default' => $mailSettings['mail_mailer']->value ?? config('mail.default'),
-                            'mail.mailers.smtp.host' => $mailSettings['mail_host']->value ?? config('mail.mailers.smtp.host'),
-                            'mail.mailers.smtp.port' => $mailSettings['mail_port']->value ?? config('mail.mailers.smtp.port'),
-                            'mail.mailers.smtp.encryption' => $mailSettings['mail_encryption']->value ?? config('mail.mailers.smtp.encryption'),
-                            'mail.mailers.smtp.username' => $mailSettings['mail_username']->value ?? config('mail.mailers.smtp.username'),
-                            'mail.mailers.smtp.password' => $mailSettings['mail_password']->value ?? config('mail.mailers.smtp.password'),
-                            'mail.from.address' => $mailSettings['mail_from_address']->value ?? config('mail.from.address'),
-                            'mail.from.name' => $mailSettings['mail_from_name']->value ?? config('mail.from.name'),
+                            'mail.default'                    => $mailer,
+                            'mail.mailers.smtp.host'          => $mailSettings['mail_host']->value ?? config('mail.mailers.smtp.host'),
+                            'mail.mailers.smtp.port'          => $mailSettings['mail_port']->value ?? config('mail.mailers.smtp.port'),
+                            'mail.mailers.smtp.encryption'    => $encNorm,
+                            'mail.mailers.smtp.username'      => $mailSettings['mail_username']->value ?? null,
+                            'mail.mailers.smtp.password'      => $mailSettings['mail_password']->value ?? null,
+                            'mail.from.address'               => $mailSettings['mail_from_address']->value ?? config('mail.from.address'),
+                            'mail.from.name'                  => $mailSettings['mail_from_name']->value ?? config('mail.from.name'),
+                            'mail.mailers.sendmail.transport' => 'sendmail',
+                            'mail.mailers.sendmail.path'      => '/usr/sbin/sendmail -bs -i',
                         ]);
                     }
                 }
