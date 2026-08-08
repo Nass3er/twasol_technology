@@ -1,11 +1,12 @@
 <?php
 
 return array (
-  'ayccl' => 'الشركة العربية اليمنية للاسمنت المحدودة',
-  'leadingcompany' => 'معا نبني اليمن',
+  'ayccl' => 'تواصل تكنولوجي',
+  'leadingcompany' => 'حلول تقنية متكاملة',
+  'twasol' => 'تواصل تكنولوجي',
   'home' => 'الرئيسية',
   'multiMedia' => 'ملتميديا',
-  'copyrights' => 'حقوق النشر  © 2025- جميع الحقوق محفوظة للشركة العربية للاسمنت المحدودة AYCCL',
+  'copyrights' => 'حقوق النشر © 2025 - جميع الحقوق محفوظة لشركة تواصل تكنولوجي',
   'moredetails' => 'مزيد من التفاصيل',
   'trustedbyothers' => 'موثوقة من قبل فرق العمل الأكثر ابتكارًا',
   'ourlocation' => 'موقعنا',
@@ -17,8 +18,8 @@ return array (
   'ess' => 'نظام الخدمة الذاتية للموظفين',
   'latestnews' => 'اخر الاخبار',
 
-  'TogetherWeBuildYemen' => 'معا نبني اليمن',
-  'ArabCementCompany' => 'الشركة العربية للإسمنت',
+  'TogetherWeBuildYemen' => 'تواصل تكنولوجي',
+  'ArabCementCompany' => 'تواصل تكنولوجي',
 
   //  من نحن
   'aboutus' => 'من نحن',
@@ -135,6 +136,6 @@ return array (
     'imageSizeError' => 'حجم الصورة يجب ألا يتجاوز 2 ميجا بايت.',
     'recaptchaRequired' => 'الرجاء التحقق من أنك لست روبوت.',
     'recaptchaFailed' => 'عذراً، يبدو أنك روبوت. يرجى المحاولة مرة أخرى.',
-    'aycclInNumbers' => 'الشركة العربية في أرقام',
+    'aycclInNumbers' => 'تواصل تكنولوجي في أرقام',
     'moreDetails' => 'عرض تفاصيل أكثر',
 );

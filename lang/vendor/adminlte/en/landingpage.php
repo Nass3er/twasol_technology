@@ -1,14 +1,15 @@
 <?php
 
 return array (
-  'clicktomove' => 'Click to Direct to be App',
-  'ayccl' => 'Arabic Yemen Cement Company Ltd.',
-  'leadingcompany' => 'With us we build Yemen',
+  'clicktomove' => 'Click to go to Dashboard',
+  'ayccl' => 'Twasol Technology',
+  'leadingcompany' => 'Integrated Technology Solutions',
+  'twasol' => 'Twasol Technology',
   'home' => 'Home',
   'aboutus' => 'About Us',
   'contactus' => 'Contact Us',
   'multiMedia' => 'Multi-Media',
-  'copyrights' => 'Copyright ©2025- All right reserved by Ayccl',
+  'copyrights' => 'Copyright ©2025 - All rights reserved by Twasol Technology',
   'moredetails' => 'more details',
   'trustedbyothers' => 'trusted by other teams',
   'ourlocation' => 'Our Location',
@@ -107,15 +108,15 @@ return array (
     'fillVisitingForm' => 'Please Fill Out the Visiting Form.',
 
     'css' => 'Customer self-service',
-    'TogetherWeBuildYemen' => 'Together we build Yemen',
-    'ArabCementCompany' => 'Arab Cement Company',
+    'TogetherWeBuildYemen' => 'Twasol Technology',
+  'ArabCementCompany' => 'Twasol Technology',
     'emailSentSuccessfully' => 'Email sent successfully.',
     'attachmentLabel' => 'Attach one file (PDF max 5MB, or Image max 2MB)',
     'pdfSizeError' => 'PDF file size must not exceed 5MB.',
     'imageSizeError' => 'Image size must not exceed 2MB.',
     'recaptchaRequired' => 'Please verify that you are not a robot.',
     'recaptchaFailed' => 'Sorry, you seem to be a robot. Please try again.',
-    'aycclInNumbers' => 'AYCCL in Numbers',
+    'aycclInNumbers' => 'Twasol Technology in Numbers',
     'moreDetails' => 'More Details',
     
 );
