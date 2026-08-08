@@ -34,9 +34,13 @@ class ServiceController extends Controller
         $service = Service::create($data);
 
         if ($request->hasFile('images')) {
+            $uploadDir = public_path('uploads/services');
+            if (!file_exists($uploadDir)) {
+                @mkdir($uploadDir, 0755, true);
+            }
             foreach ($request->file('images') as $file) {
                 $fileName = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/services'), $fileName);
+                $file->move($uploadDir, $fileName);
                 $filePath = 'uploads/services/' . $fileName;
                 
                 $service->images()->create([
@@ -70,9 +74,13 @@ class ServiceController extends Controller
         $service->update($data);
 
         if ($request->hasFile('images')) {
+            $uploadDir = public_path('uploads/services');
+            if (!file_exists($uploadDir)) {
+                @mkdir($uploadDir, 0755, true);
+            }
             foreach ($request->file('images') as $file) {
                 $fileName = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/services'), $fileName);
+                $file->move($uploadDir, $fileName);
                 $filePath = 'uploads/services/' . $fileName;
 
                 $service->images()->create([

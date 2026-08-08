@@ -43,6 +43,11 @@ class SettingsController extends Controller
 
         // Process Logo upload
         if ($request->hasFile('logo')) {
+            $uploadDir = public_path('uploads/settings');
+            if (!file_exists($uploadDir)) {
+                @mkdir($uploadDir, 0755, true);
+            }
+
             $logoSetting = Setting::where('para', 'logo')->first();
             if ($logoSetting && $logoSetting->imagepath && file_exists(public_path($logoSetting->imagepath))) {
                 @unlink(public_path($logoSetting->imagepath));
@@ -50,7 +55,7 @@ class SettingsController extends Controller
 
             $file = $request->file('logo');
             $fileName = 'logo_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/settings'), $fileName);
+            $file->move($uploadDir, $fileName);
             $logoPath = 'uploads/settings/' . $fileName;
 
             Setting::where('para', 'logo')->update([

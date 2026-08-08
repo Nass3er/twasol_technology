@@ -36,9 +36,13 @@ class CustomerController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
+            $uploadDir = public_path('uploads/customers');
+            if (!file_exists($uploadDir)) {
+                @mkdir($uploadDir, 0755, true);
+            }
             $file = $request->file('logo');
             $fileName = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/customers'), $fileName);
+            $file->move($uploadDir, $fileName);
             $data['logo'] = 'uploads/customers/' . $fileName;
         }
 
