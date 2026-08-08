@@ -36,6 +36,15 @@ Route::get('/link-storage', function () {
     return 'Storage link created successfully!';
 });
 
+Route::get('/clear-all-cache', function () {
+    Artisan::call('view:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    
+    return 'All cache (Views, Application Cache, Config, Routes) cleared successfully!';
+});
+
 // Default root: redirect to locale
 Route::get('/', function () {
     $locale = Session::get('locale') ?? app()->getLocale();
