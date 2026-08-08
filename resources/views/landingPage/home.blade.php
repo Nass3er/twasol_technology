@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- HERO SECTION --}}
-<section class="hero-section" style="background: radial-gradient(circle at top right, rgba(26, 26, 46, 0.95), rgba(10, 15, 29, 0.98)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1920') no-repeat center center/cover; min-height: 85vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 80px 0;">
+<section class="hero-section" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.72) 0%, rgba(30, 41, 59, 0.78) 100%), url('{{ asset('images/hero_background.jpg') }}') no-repeat center center/cover; min-height: 85vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 80px 0;">
     <!-- Ambient glowing lights behind elements -->
     <div style="position: absolute; top: -10%; right: -10%; width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(var(--color-primary-rgb, 99, 102, 241), 0.15) 0%, transparent 70%); pointer-events: none; filter: blur(50px);"></div>
     <div style="position: absolute; bottom: -10%; left: -10%; width: 30vw; height: 30vw; background: radial-gradient(circle, rgba(var(--color-primary-rgb, 99, 102, 241), 0.1) 0%, transparent 70%); pointer-events: none; filter: blur(50px);"></div>

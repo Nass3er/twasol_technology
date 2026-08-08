@@ -1,5 +1,5 @@
 <div class="hero h-100 lg:h-150 bg-center bg-cover" 
-style="background-image: url(./images/news1.png);">
+style="background-image: url('{{ asset('images/hero_background.jpg') }}');">
     {{-- <img 
 class="mask-r-from-10% mask-l-from-10% w-full h-full object-cover" 
 src="./images/news1.png" 
