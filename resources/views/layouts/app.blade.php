@@ -116,5 +116,6 @@
     @include('daisyUI.footer')
 
     @yield('js')
+    @stack('scripts')
 </body>
 </html>

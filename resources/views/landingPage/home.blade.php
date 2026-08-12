@@ -158,15 +158,23 @@
                         <h3 class="text-xl font-bold mb-2" style="color: var(--color-primary);">
                             {{ app()->getLocale() == 'ar' ? $service->name_ar : $service->name_en }}
                         </h3>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                            {{ Str::limit(app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en, 110) }}
+
+                        @php
+                            $fullText  = app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en;
+                            $shortText = Str::limit($fullText, 110);
+                            $needsMore = mb_strlen($fullText) > 110;
+                            $moreLabel = app()->getLocale() == 'ar' ? ' عرض أكثر' : ' Show more';
+                            $lessLabel = app()->getLocale() == 'ar' ? ' عرض أقل' : ' Show less';
+                        @endphp
+
+                        <p class="text-gray-600 text-sm leading-relaxed mb-3 service-desc-para">
+                            @if($needsMore)
+                                <span class="short-part">{{ $shortText }}<button type="button" class="toggle-inline-btn" style="color: var(--color-primary); background:none; border:none; cursor:pointer; font-size:inherit; font-weight:600; padding:0 2px;">{{ $moreLabel }}</button></span>
+                                <span class="full-part" style="display:none;">{{ $fullText }}<button type="button" class="toggle-inline-btn" style="color: #9ca3af; background:none; border:none; cursor:pointer; font-size:inherit; font-weight:600; padding:0 2px;">{{ $lessLabel }}</button></span>
+                            @else
+                                {{ $fullText }}
+                            @endif
                         </p>
-                    </div>
-                    <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
-                        <a href="{{ localizedRoute('services.detail', ['id' => $service->id]) }}" class="inline-flex items-center gap-1.5 font-bold text-sm hover:underline" style="color: var(--color-primary);">
-                            <span>{{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }}</span>
-                            <i class="fas fa-arrow-left text-xs rtl:rotate-0 ltr:rotate-180"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -380,5 +388,29 @@
         </a>
     </div>
 </section>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.toggle-inline-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var para      = btn.closest('.service-desc-para');
+            var shortPart = para.querySelector('.short-part');
+            var fullPart  = para.querySelector('.full-part');
+
+            if (shortPart.style.display === 'none') {
+                // Collapse
+                fullPart.style.display  = 'none';
+                shortPart.style.display = '';
+            } else {
+                // Expand
+                shortPart.style.display = 'none';
+                fullPart.style.display  = '';
+            }
+        });
+    });
+});
+</script>
+@endpush
 
 @endsection
