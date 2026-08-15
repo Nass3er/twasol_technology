@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Error404 Not Found</title>
-    <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=3">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=3">
 
 
     <!-- Fonts -->

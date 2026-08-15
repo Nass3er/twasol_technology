@@ -29,10 +29,11 @@
     <link rel="canonical" href="{{ $currentUrl }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=2">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}?v=2">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=3">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon-32x32.png') }}?v=3">
 
     <!-- Multi-language Hreflang Tags for Search Engines -->
     <link rel="alternate" hreflang="ar" href="{{ $arUrl }}">
@@ -54,9 +55,6 @@
     <meta name="twitter:title" content="{{ $pageTitle }}">
     <meta name="twitter:description" content="{{ $pageDescription }}">
     <meta name="twitter:image" content="{{ $pageOgImage }}">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ isset($logoPath) && $logoPath ? asset($logoPath) : asset('images/twasol_logo.png') }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">

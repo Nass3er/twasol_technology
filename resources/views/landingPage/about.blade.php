@@ -24,9 +24,9 @@
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
             <div class="flex-1 text-center" data-aos="fade-right">
-                @if(isset($logoPath) && $logoPath)
-                    <img src="{{ asset($logoPath) }}" alt="{{ $settings['company_name_ar'] ?? '' }}" style="max-height: 200px; max-width: 320px; object-fit: contain;" class="mx-auto drop-shadow-xl">
-                @endif
+                <img src="{{ asset('images/aboutus.jpeg') }}" 
+                     alt="{{ $settings['company_name_ar'] ?? '' }}" 
+                     class="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg max-h-[320px] sm:max-h-[400px] md:max-h-[450px] object-cover sm:object-contain mx-auto rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
             </div>
             <div class="flex-1" data-aos="fade-left">
                 <h2 class="text-2xl font-bold mb-4" style="color: var(--color-primary);">
