@@ -116,10 +116,15 @@
             <div style="width: 60px; height: 4px; background: var(--color-primary); margin: 0 auto;"></div>
         </div>
         <div class="flex flex-col md:flex-row items-center gap-10 max-w-4xl mx-auto">
-            <div class="flex-1" data-aos="fade-right">
+            <!-- <div class="flex-1" data-aos="fade-right">
                 @if(isset($logoPath) && $logoPath)
                     <img src="{{ asset($logoPath) }}" alt="{{ $settings['company_name_ar'] ?? '' }}" class="mx-auto" style="max-height: 180px; max-width: 300px; object-fit: contain;">
                 @endif
+            </div> -->
+             <div class="flex-1 text-center" data-aos="fade-right">
+                <img src="{{ asset('images/aboutus.jpeg') }}" 
+                     alt="{{ $settings['company_name_ar'] ?? '' }}" 
+                     class="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg max-h-[320px] sm:max-h-[400px] md:max-h-[450px] object-cover sm:object-contain mx-auto rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
             </div>
             <div class="flex-1" data-aos="fade-left">
                 <p class="text-gray-700 text-lg leading-relaxed">
